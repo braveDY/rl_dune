@@ -1,0 +1,25 @@
+# Generated from config/unified_config.yaml
+# To modify, edit the unified config and regenerate
+
+robot:
+  length: 0.6
+  width: 0.4
+  # Corner points relative to lidar origin (x, y)
+  corner_points:
+    front_left: [0.1, 0.2]
+    front_right: [0.1, -0.2]
+    rear_left: [-0.5, 0.2]
+    rear_right: [-0.5, -0.2]
+
+train:
+  direct_train: True
+  data_size: 100000
+  data_range: [-25, -25, 25, 25]
+  batch_size: 256
+  epoch: 5000
+  valid_freq: 250
+  save_freq: 500
+  lr: "5e-5"
+  lr_decay: 0.5
+  decay_freq: 1500
+  checkpoint_dir: "dune/dune_model/diff_0_6_0_4"

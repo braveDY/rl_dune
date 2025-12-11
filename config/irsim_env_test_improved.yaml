@@ -1,0 +1,105 @@
+world:
+  height: 20  # 世界高度
+  width: 20   # 世界宽度
+  step_time: 0.1  # 10Hz 每步计算
+  sample_time: 0.1  # 10 Hz 渲染和数据提取
+  offset: [0, 0] # 世界在x和y上的偏移
+  collision_mode: 'stop'  # 'stop', 'unobstructed'
+  control_mode: 'auto'  # 'keyboard', 'auto'
+
+robot:
+  - kinematics: {name: 'diff'}  # 差速驱动
+    shape: {name: 'rectangle', length: 0.6, width: 0.4}
+    state: [2, 2, 0, 0]  # 初始状态 [x, y, theta, v] (会被随机重置)
+    goal: [18, 18, 0]  # 目标位置 (会被随机重置)
+    vel_min: [-8, -3.14]
+    vel_max: [8, 3.14] # 最大速度 [v_max, w_max]
+    behavior: {name: 'none'}  # 不使用内置行为，由RL策略控制
+    
+    sensors: 
+      - type: 'lidar2d'
+        range_min: 0.1
+        range_max: 10.0  # 雷达最大范围
+        angle_range: 6.283185307  # 360度扫描范围
+        number: 200  # 200个激光束
+        noise: True  # 与URDF一致，开启噪声
+        std: 0.01   # 距离噪声标准差，与URDF一致 (1cm)
+        angle_std: 0.0  # 角度噪声，URDF中未设置
+        offset: [0.2, 0, 0]  # 雷达相对机器人的偏移 - 与URDF一致，安装在前方
+        alpha: 0.3  # 可视化透明度
+
+# 方案1：分散式障碍物配置
+obstacle:
+  # 第一组：左上区域
+  - number: 4
+    distribution: {name: 'random', range_low: [5, 12, -3.14], range_high: [12, 19, 3.14]}
+    kinematics: {name: 'omni'}
+    shape:
+      - {name: 'circle', radius: 0.3}
+    behavior: {
+      name: 'rvo', 
+      vxmax: 1.0, vymax: 1.0, accer: 1.5, factor: 0.9,
+      range_low: [5, 12, -3.14], range_high: [12, 19, 3.14], 
+      wander: True
+    }
+    vel_min: [-1.5, -1.5]
+    vel_max: [1.5, 1.5]
+    arrive_mode: position
+    goal_threshold: 1.0
+    plot: {show_goal: True, show_arrow: True}
+
+  # 第二组：右上区域
+  - number: 4
+    distribution: {name: 'random', range_low: [12, 12, -3.14], range_high: [19, 19, 3.14]}
+    kinematics: {name: 'omni'}
+    shape:
+      - {name: 'circle', radius: 0.35}
+    behavior: {
+      name: 'rvo', 
+      vxmax: 1.0, vymax: 1.0, accer: 1.5, factor: 0.9,
+      range_low: [12, 12, -3.14], range_high: [19, 19, 3.14], 
+      wander: True
+    }
+    vel_min: [-1.5, -1.5]
+    vel_max: [1.5, 1.5]
+    arrive_mode: position
+    goal_threshold: 1.0
+    plot: {show_goal: True, show_arrow: True}
+
+  # 第三组：左下区域
+  - number: 4
+    distribution: {name: 'random', range_low: [5, 5, -3.14], range_high: [12, 12, 3.14]}
+    kinematics: {name: 'omni'}
+    shape:
+      - {name: 'circle', radius: 0.3}
+    behavior: {
+      name: 'rvo', 
+      vxmax: 1.0, vymax: 1.0, accer: 1.5, factor: 0.9,
+      range_low: [5, 5, -3.14], range_high: [12, 12, 3.14], 
+      wander: True
+    }
+    vel_min: [-1.5, -1.5]
+    vel_max: [1.5, 1.5]
+    arrive_mode: position
+    goal_threshold: 1.0
+    plot: {show_goal: True, show_arrow: True}
+
+  # 第四组：中央巡逻
+  - number: 3
+    distribution: {name: 'random', range_low: [8, 8, -3.14], range_high: [16, 16, 3.14]}
+    kinematics: {name: 'omni'}
+    shape:
+      - {name: 'circle', radius: 0.4}
+    behavior: {
+      name: 'rvo', 
+      vxmax: 0.8, vymax: 0.8, accer: 1.2, factor: 1.0,
+      range_low: [8, 8, -3.14], range_high: [16, 16, 3.14], 
+      wander: True
+    }
+    vel_min: [-1.2, -1.2]
+    vel_max: [1.2, 1.2]
+    arrive_mode: position
+    goal_threshold: 1.2
+    plot: {show_goal: True, show_arrow: True}
+
+    
