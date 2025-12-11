@@ -303,8 +303,8 @@ if __name__ == "__main__":
     
     # 可选：从已有模型初始化（继续训练）
     pretrained_model_file = None
-    pretrained_model_file = "models/td3_step_125000.pth"
-    if Path("models/td3_step_125000.pth").exists():
+    pretrained_model_file = "models/td3_step_100000.pth"
+    if Path(pretrained_model_file).exists():
         pretrained_model = load_policy(pretrained_model_file, obs_dim)
     
     agent = TD3Agent(
@@ -325,7 +325,7 @@ if __name__ == "__main__":
         agent,
         replay_buffer,
         total_steps=100000,
-        start_steps=1000,
+        start_steps=0,
         batch_size=256,
         eval_freq=5000
     )
