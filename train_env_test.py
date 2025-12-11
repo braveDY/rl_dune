@@ -53,7 +53,7 @@ def main():
     dune, config = load_config_and_dune()
     env = DiffRobotEnv(irsim_yaml="config/irsim_env_dune_train.yaml", display=True, dune=dune)
     obs_dim = env.observation_space.shape[0]
-    policy = load_policy("models/td3_step_15000.pth", obs_dim)
+    policy = load_policy("models/td3_step_100000.pth", obs_dim)
 
     for episode in range(10):
         obs, info = env.reset(episode + 10)

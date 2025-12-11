@@ -1,2 +1,31 @@
+# RL Robot Navigation
 
-训练dume模块，相关的配置参数在 "DUNE/dune_train_config/dune_train_diff.yaml"，训练指令：python 
+## 安装依赖
+
+```bash
+pip install torch numpy cvxpy pyyaml irsim
+```
+
+## DUNE 模型训练
+
+```bash
+python dune/dune_train.py --config config/dune_train.yaml
+```
+
+## TD3 强化学习训练
+
+```bash
+python train_td3.py
+```
+
+## TD3 策略测试
+
+```bash
+python test_td3.py
+```
+
+## 环境测试
+
+```bash
+python train_env_test.py
+```

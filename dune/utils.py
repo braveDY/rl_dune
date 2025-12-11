@@ -4,6 +4,7 @@ import numpy as np
 
 def cross(o: np.ndarray, a: np.ndarray, b: np.ndarray) -> float:
     return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+    
 def check_convex_order(points: np.ndarray) -> Tuple[bool, Optional[str]]:
     n = points.shape[1]
     if n < 3:
@@ -21,6 +22,7 @@ def check_convex_order(points: np.ndarray) -> Tuple[bool, Optional[str]]:
                 return False, None
     
     return True, "CCW" if direction > 0 else "CW"
+
 def convex_vertex_to_ineq(vertices: np.ndarray) -> Tuple[Optional[np.ndarray], Optional[np.ndarray]]:
     is_convex, order = check_convex_order(vertices)
     if not is_convex:
@@ -45,11 +47,6 @@ def convex_vertex_to_ineq(vertices: np.ndarray) -> Tuple[Optional[np.ndarray], O
 
     return G, h
 
-def diff_ineq(length, width):
-    vertices = np.array([
-        [-length/2, length/2, length/2, -length/2],
-        [-width/2, -width/2, width/2, width/2]
-    ])
-    return convex_vertex_to_ineq(vertices)
+
 
 
