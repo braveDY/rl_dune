@@ -3,7 +3,10 @@
 ## 安装依赖
 
 ```bash
-pip install torch numpy cvxpy pyyaml irsim
+conda create -n RL python=3.10 -y
+conda activate RL
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+pip install numpy cvxpy pyyaml irsim
 ```
 
 ## DUNE 模型训练
