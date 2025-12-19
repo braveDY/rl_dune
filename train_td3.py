@@ -5,10 +5,10 @@ import numpy as np
 from collections import deque
 import random
 from pathlib import Path
-from env.env_dune import DiffRobotEnv
+from environment.env_dune import DiffRobotEnv
 import yaml
 from dune.dune import DUNE
-from env.env_dune import V_MIN, V_MAX, W_MIN, W_MAX
+from environment.env_dune import V_MIN, V_MAX, W_MIN, W_MAX
 
 class ReplayBuffer:
     """经验回放缓冲区"""

@@ -2,7 +2,7 @@
 import numpy as np
 import pickle
 from pathlib import Path
-from env.env_dune import DiffRobotEnv, V_MIN, V_MAX, W_MIN, W_MAX
+from environment.env_dune import DiffRobotEnv, V_MIN, V_MAX, W_MIN, W_MAX
 from neupan import neupan
 import warnings
 import tqdm

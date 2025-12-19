@@ -131,7 +131,7 @@ def train_bc(data_path, save_path, action_low, action_high, epochs=10000, batch_
 
 
 if __name__ == "__main__":
-    from ENV.env_dune import V_MIN, V_MAX, W_MIN, W_MAX
+    from environment.env_dune import V_MIN, V_MAX, W_MIN, W_MAX
     
     train_bc(
         data_path="imitation_data/expert_demonstrations.pkl",

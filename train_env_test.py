@@ -8,7 +8,7 @@ import torch
 import numpy as np
 import os
 from train_td3 import Actor
-from env.env_dune import DiffRobotEnv, V_MAX, V_MIN, W_MAX, W_MIN
+from environment.env_dune import DiffRobotEnv, V_MAX, V_MIN, W_MAX, W_MIN
 from dune.dune import DUNE
 import yaml
 import argparse

@@ -1,9 +1,9 @@
-from ENV.env_dune import DiffRobotEnv
+from environment.env_dune import DiffRobotEnv
 from train_bc import BCPolicy
 import torch
 import numpy as np
 
-env = DiffRobotEnv("ENV/irsim_env.yaml", display=True)
+env = DiffRobotEnv("environment/irsim_env.yaml", display=True)
 state, _ = env.reset()
 policy = BCPolicy(env.observation_space.shape[0], env.action_space.shape[0], env.action_space.low, env.action_space.high)
 policy.load_state_dict(torch.load("models/bc_policy_best.pth"))
